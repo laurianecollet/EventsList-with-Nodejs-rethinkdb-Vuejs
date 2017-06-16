@@ -1,0 +1,19 @@
+2017-06-16T09:19:15.274703000 40.087844s notice: Recursively removing directory /Users/laurianecollet/Dev/Checkpoint4/my-project/rethinkdb_data/tmp
+2017-06-16T09:19:15.277097000 40.090244s notice: Initializing directory /Users/laurianecollet/Dev/Checkpoint4/my-project/rethinkdb_data
+2017-06-16T09:19:15.277273000 40.090413s info: Creating a default database for your convenience. (This is because you ran 'rethinkdb' without 'create', 'serve', or '--join', and the directory '/Users/laurianecollet/Dev/Checkpoint4/my-project/rethinkdb_data' did not already exist or is empty.)
+2017-06-16T09:19:15.277337000 40.090477s notice: Running rethinkdb 2.3.5 (CLANG 7.3.0 (clang-703.0.31))...
+2017-06-16T09:19:15.296925000 40.110066s notice: Running on Darwin 16.5.0 x86_64
+2017-06-16T09:19:15.297015000 40.110155s notice: Loading data from directory /Users/laurianecollet/Dev/Checkpoint4/my-project/rethinkdb_data
+2017-06-16T09:19:15.426450000 40.239590s info: Automatically using cache size of 173 MB
+2017-06-16T09:19:15.427634000 40.240774s notice: Listening for intracluster connections on port 29015
+2017-06-16T09:19:15.432596000 40.245736s notice: Listening for client driver connections on port 28015
+2017-06-16T09:19:15.432726000 40.245866s notice: Listening for administrative HTTP connections on port 8080
+2017-06-16T09:19:15.432729000 40.245868s notice: Listening on cluster addresses: 127.0.0.1, ::1
+2017-06-16T09:19:15.432735000 40.245874s notice: Listening on driver addresses: 127.0.0.1, ::1
+2017-06-16T09:19:15.432737000 40.245876s notice: Listening on http addresses: 127.0.0.1, ::1
+2017-06-16T09:19:15.432740000 40.245880s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2017-06-16T09:19:15.432744000 40.245883s notice: Server ready, "MacBook_Air_de_Lauriane_local_y86" 3378f176-aa74-49b4-9cf3-dc47ef7715d0
+2017-06-16T09:20:46.716603000 131.527037s notice: Someone asked for the nonwhitelisted file "/f8bb5fe25436dda1f229.hot-update.json".  If this should be accessible, add it to the static web assets.
+2017-06-16T09:23:23.291442000 288.097261s info: Table 600257f5-24c1-46b1-9fac-8fd63c8afae4: Starting a new Raft election for term 1.
+2017-06-16T09:23:23.291741000 288.097560s info: Table 600257f5-24c1-46b1-9fac-8fd63c8afae4: Added replica on this server.
+2017-06-16T09:23:23.304624000 288.110444s info: Table 600257f5-24c1-46b1-9fac-8fd63c8afae4: This server is Raft leader for term 1. Latest log index is 0.
