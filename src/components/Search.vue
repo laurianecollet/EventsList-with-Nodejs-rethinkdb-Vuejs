@@ -7,7 +7,7 @@
 							<option >Prix</option>
   		</select>
 		</li>
-		<input @keyup.enter="searchFunction()" type="search" v-model="search">
+		<input @keyup="searchFunc()" type="search" v-model="dataStore.search">
 
 	</div>
 </template>
@@ -19,15 +19,11 @@
 		data() {
 			return {
 				dataStore: Store.datas,
-				search: "",
 			}
 		},
 		methods: {
-			searchFunction() {
-				this.$http.get(`http://localhost:3000/filter?search=${this.search}`).then((res) => {
-					this.dataStore.events = res.body;
-					console.log(this.search) // il ne complete pas mon champ search 
-				});
+			searchFunc() {
+				Store.searchFunction();
 			},
 		}
 	}

@@ -48,8 +48,7 @@ let connection = r.connect({
 		})
 	});
 	// Filter with a search
-	//Mes requetes fonctionnent , elles marchent sur Rethinkdb, mais je n'arrive pas et je ne comprends pas comment faire le lien...
-	app.get('/filter', (req, res) => {
+	app.get('/filter/', (req, res) => {
 		let search = req.query.search;
 		console.log(req.query)
 		console.log(req.params)
