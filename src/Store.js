@@ -4,8 +4,8 @@ export const Store = {
 		events: [],
 		search: "",
 		tris: [
-			{ text: "Intitule", value: "Intitule" },
-			{ text: "Prix", value: "Prix" },
+			{ text: "Intitule", value: "intitule" },
+			{ text: "Prix", value: "prix" },
 		],
 		orderby: '',
 	},
@@ -15,7 +15,7 @@ export const Store = {
 		});
 	},
 	searchFunction() {
-		axios.get(`http://localhost:3000/filter?search=${this.datas.search}?orderby=${this.datas.orderby}`).then((res) => {
+		axios.get(`http://localhost:3000/filter?search=${this.datas.search}&tri=${this.datas.orderby}`).then((res) => {
 			this.datas.events = res.data;
 			console.log(this.datas.search)
 			console.log(this.datas.events)

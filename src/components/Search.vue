@@ -2,7 +2,7 @@
 	<div>
 		<vue-toast ref='toast'></vue-toast>
 		<li>
-			<select class="browser-default" @click="searchFunc()" v-model="dataStore.orderby">
+			<select class="browser-default" v-model="dataStore.orderby" @change="searchFunc()">
     					<option value="" disabled selected>Trier par </option>
 							<option v-for="tri in dataStore.tris" v-bind:value="tri.value" >{{tri.text}}</option>
   		</select>

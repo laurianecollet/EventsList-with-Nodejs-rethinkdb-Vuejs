@@ -59,35 +59,27 @@ let connection = r.connect({
 	});
 	// Filter with a search
 	app.get('/filter/', (req, res) => {
+		let tri = req.query.tri;
 		let search = req.query.search;
-		let orderbyintitule = req.query.orderbyintitule
-		console.log(req.query)
-		console.log(req.params)
-		console.log(search)
-		console.log('Je suis dans le GET')
+		let requete = r.db('onlylyon').table('festivals');
+
 		if (search !== '') {
-			console.log('Je suis dans mon premier if')
-			r.db('onlylyon').table('festivals').limit(7).orderBy('dateheure').filter(function (doc) {
+			requete = requete.filter(function (doc) {
 				return doc('intitule').match(`(?i)${search}`)
-			}).run(connection, (err, cursor) => {
-				cursor.toArray((err, result) => {
-					return res.json(result)
-				})
 			})
 		}
-		if (orderbyintitule !== '') {
-			r.db('onlylyon').table('festivals').limit(7).orderBy(r.asc('intitule')).run(connection, (err, cursor) => {
-				cursor.toArray((err, result) => {
-					return res.json(result)
-				})
-			})
-		} else {
-			r.db('onlylyon').table('festivals').limit(7).orderBy('dateheure').run(connection, (err, cursor) => {
-				cursor.toArray((err, result) => {
-					return res.json(result)
-				});
+		if (tri === 'intitule') {
+			requete = requete.orderBy(r.asc('intitule'));
+
+		} else if (tri === 'prix') {
+			requete = requete.orderBy(r.asc('prix'));
+		}
+
+		requete.run(connection, (err, cursor) => {
+			cursor.toArray((err, result) => {
+				return res.json(result);
 			});
-		}
+		});
 	});
 	// Change price in free 
 	app.post('/gratuit/:id', (req, res) => {
