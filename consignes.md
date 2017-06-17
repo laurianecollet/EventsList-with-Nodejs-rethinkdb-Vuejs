@@ -15,11 +15,12 @@ Nb: Chaque intitulé est accompagné d’une requête à effectuer côté Node/R
 
 * Pouvoir filtrer sur l’intitulé d’un événement avec un champ texte selon un mot-clef saisi (computed, c’est sympa aussi)
 
+* Créer un bouton permettant à chaque événement payant de le rendre gratuit (cela met également à null son prix)
+
 ------
 
 * Pouvoir trier sur la liste par intitulé de A-Z ou par prix croissant avec une simple liste déroulante avec une requête en base de données
 
-* Créer un bouton permettant à chaque événement payant de le rendre gratuit (cela met également à null son prix)
 
 * A l’aide de  2 bouton “+” et “-” (icons) permettre d’augmenter ou de diminuer le nb de billet disponible
 

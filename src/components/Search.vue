@@ -1,10 +1,9 @@
 <template>
 	<div>
 		<li>
-			<select class="browser-default">
+			<select class="browser-default" @click="searchFunc()" v-model="dataStore.orderby">
     					<option value="" disabled selected>Trier par </option>
-							<option >Intitule</option>
-							<option >Prix</option>
+							<option v-for="tri in dataStore.tris" v-bind:value="tri.value" >{{tri.text}}</option>
   		</select>
 		</li>
 		<input @keyup="searchFunc()" type="search" v-model="dataStore.search">

@@ -41,7 +41,7 @@ let connection = r.connect({
 }).then((connection) => { // une fois qu'il a effectuer une connexion 
 
 	app.get('/', (req, res) => {
-		r.db('onlylyon').table('festivals').limit(7).orderBy('dateheure').pluck('type', 'intitule', 'url', 'payant', 'prix').run(connection, (err, cursor) => {
+		r.db('onlylyon').table('festivals').limit(7).orderBy('dateheure').run(connection, (err, cursor) => {
 			cursor.toArray((err, result) => {
 				return res.json(result)
 			})
@@ -50,6 +50,7 @@ let connection = r.connect({
 	// Filter with a search
 	app.get('/filter/', (req, res) => {
 		let search = req.query.search;
+		let orderbyintitule = req.query.orderbyintitule
 		console.log(req.query)
 		console.log(req.params)
 		console.log(search)
@@ -58,19 +59,55 @@ let connection = r.connect({
 			console.log('Je suis dans mon premier if')
 			r.db('onlylyon').table('festivals').limit(7).orderBy('dateheure').filter(function (doc) {
 				return doc('intitule').match(`(?i)${search}`)
-			}).pluck('type', 'intitule', 'url', 'payant', 'prix').run(connection, (err, cursor) => {
+			}).run(connection, (err, cursor) => {
+				cursor.toArray((err, result) => {
+					return res.json(result)
+				})
+			})
+		}
+		if (orderbyintitule !== '') {
+			r.db('onlylyon').table('festivals').limit(7).orderBy(r.asc('intitule')).run(connection, (err, cursor) => {
 				cursor.toArray((err, result) => {
 					return res.json(result)
 				})
 			})
 		} else {
-			r.db('onlylyon').table('festivals').limit(7).orderBy('dateheure').pluck('type', 'intitule', 'url', 'payant', 'prix').run(connection, (err, cursor) => {
+			r.db('onlylyon').table('festivals').limit(7).orderBy('dateheure').run(connection, (err, cursor) => {
 				cursor.toArray((err, result) => {
 					return res.json(result)
-				})
+				});
 			});
 		}
 	});
+	// Change price in free 
+	app.post('/gratuit/:id', (req, res) => {
+		let id = req.params.id;
+		console.log(id)
+		r.db('onlylyon').table('festivals').get(id).update({ payant: false, prix: null }).run(connection, (err, cursor) => {
+			if (err) throw err;
+			r.db('onlylyon').table('festivals').limit(7).orderBy('dateheure').run(connection, (err, cursor) => {
+				cursor.toArray((err, result) => {
+					return res.json(result)
+				});
+			});
+		});
+	});
+
+	app.post('/payant/:id', (req, res) => {
+		let id = req.params.id;
+		console.log(id)
+		r.db('onlylyon').table('festivals').get(id).update({ payant: true, prix: 10 }).run(connection, (err, cursor) => {
+			if (err) throw err;
+			r.db('onlylyon').table('festivals').limit(7).orderBy('dateheure').run(connection, (err, cursor) => {
+				cursor.toArray((err, result) => {
+					return res.json(result)
+				});
+			});
+		});
+	});
+
+	/* Requete pour trier par ordre croissant les prix r.db('onlylyon').table('festivals').limit(7).orderBy(r.asc('prix'))*/
+
 });
 
 app.listen(3000, function () {

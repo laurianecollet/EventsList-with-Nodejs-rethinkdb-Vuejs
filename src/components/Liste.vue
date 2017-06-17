@@ -18,6 +18,8 @@
 					</div>
 					<div class="card-action">
 						<a href="#">Envoyer un email</a>
+						<a href="#" v-if="event.payant === true" @click="billetGratuit(event.id)">Gratuit</a>
+						<a href="#" v-if="event.payant === false" @click="billetPayant(event.id)">Payant</a>
 					</div>
 				</div>
 			</div>
@@ -37,6 +39,15 @@
 		created() {
 			Store.loadData();
 		},
+		methods: {
+			billetGratuit(id) {
+				Store.changeGratuit(id)
+				console.log(id)
+			},
+			billetPayant(id) {
+				Store.changePayant(id)
+			}
+		}
 	}
 
 </script>
