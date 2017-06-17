@@ -21,9 +21,13 @@ Nb: Chaque intitulé est accompagné d’une requête à effectuer côté Node/R
 
 * Créer un bouton permettant d’envoyer par email les 5 événements les plus récents à  l’adresse julien.boyer@wildcodeschool.fr
 
-------
+* Utiliser le plugin Vue-Toast pour émettre des toast sur les actions d’envoie email https://github.com/AStaroverov/vue-toast
 
 * Pouvoir trier sur la liste par intitulé de A-Z ou par prix croissant avec une simple liste déroulante avec une requête en base de données
+
+
+------
+
 
 
  
@@ -31,7 +35,6 @@ Nb: Chaque intitulé est accompagné d’une requête à effectuer côté Node/R
  
 ###Magasin de Bonus
  
-* Utiliser le plugin Vue-Toast pour émettre des toast sur les actions d’envoie email https://github.com/AStaroverov/vue-toast
 
 * Créer un bouton  pour chaque événement “Voir le détail” afin de tomber sur une vue ou l’on voit tout le détail d’un événement
 
