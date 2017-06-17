@@ -41,6 +41,10 @@ export const Store = {
 		axios.post(`http://localhost:3000/billetMoins/${id}`).then((res) => {
 			this.datas.events = res.data;
 		});
+	},
+	sendMailJu() {
+		axios.post(`http://localhost:3000/send`).then((res) => {
+			this.datas.events = res.data;
+		});
 	}
-
 }

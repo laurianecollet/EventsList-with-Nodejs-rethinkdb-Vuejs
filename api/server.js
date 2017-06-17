@@ -14,6 +14,7 @@ let bodyParser = require('body-parser');
 let logger = require('morgan');
 let helmet = require('helmet');
 let passport = require('passport');
+let nodemailer = require('nodemailer'); // module pour envoi d'email
 app.use(logger('dev'));
 app.use(require('cookie-parser')());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -23,6 +24,15 @@ app.use(cors());
 logger('tiny')
 app.use(helmet());
 
+
+var transporter = nodemailer.createTransport({
+	host: "smtp.mailtrap.io",
+	port: 2525,
+	auth: {
+		user: "2e45841cd95d56",
+		pass: "0e5b9a76556c21"
+	}
+});
 
 /**
  * Module RethinkDb
@@ -132,9 +142,33 @@ let connection = r.connect({
 		});
 	});
 
+	app.post('/send', (req, res) => {
+		r.db('onlylyon').table('festivals').limit(5).run(connection, (err, cursor) => {
+			cursor.toArray((err, result) => {
+				let evenements = '';
+				result.forEach((event) => {
+					evenements += `${event.intitule} rentre dans la catégorie ${event.type} et il reste seulement ${event.nbbillet} billets</br>`
+				});
+				let mailOptions = {
+					from: '"Lauriane Collet" <laurianecollet@gmail.com>', // sender address
+					to: "julien@gmail.com", // list of receivers
+					subject: 'La liste des 5 derniers évenements', // Subject line
+					text: 'Blabla', // plain text body
+					html: `<p>Voici les 5 derniers évenements:</p>
+					<p>${evenements}</p>`
+				};
+				transporter.sendMail(mailOptions, (error, info) => {
+					if (error) {
+						return console.log(error);
+					}
+					console.log('Message %s sent: %s', info.messageId, info.response);
+					res.json(true);
+				});
+			});
+		});
+	});
 
 	/* Requete pour trier par ordre croissant les prix r.db('onlylyon').table('festivals').limit(7).orderBy(r.asc('prix'))*/
-	/*Requete pour ajouter un billet : r.db('onlylyon').table('festivals').get('1b29ebe7-265b-4038-a46f-86c98551fb45')('nbbillet').add(1) */
 });
 
 app.listen(3000, function () {

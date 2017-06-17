@@ -17,12 +17,13 @@ Nb: Chaque intitulé est accompagné d’une requête à effectuer côté Node/R
 
 * Créer un bouton permettant à chaque événement payant de le rendre gratuit (cela met également à null son prix)
 
+* A l’aide de  2 bouton “+” et “-” (icons) permettre d’augmenter ou de diminuer le nb de billet disponible
+
+
 ------
 
 * Pouvoir trier sur la liste par intitulé de A-Z ou par prix croissant avec une simple liste déroulante avec une requête en base de données
 
-
-* A l’aide de  2 bouton “+” et “-” (icons) permettre d’augmenter ou de diminuer le nb de billet disponible
 
 * Créer un bouton permettant d’envoyer par email les 5 événements les plus récents à  l’adresse julien.boyer@wildcodeschool.fr
  

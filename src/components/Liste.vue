@@ -20,7 +20,6 @@
 						<a @click="deleteBillet(event.id)">-</a>
 					</div>
 					<div class="card-action">
-						<a href="#">Envoyer un email</a>
 						<a href="#" v-if="event.payant === true" @click="billetGratuit(event.id)">Gratuit</a>
 						<a href="#" v-if="event.payant === false" @click="billetPayant(event.id)">Payant</a>
 					</div>

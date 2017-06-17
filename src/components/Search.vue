@@ -7,7 +7,7 @@
   		</select>
 		</li>
 		<input @keyup="searchFunc()" type="search" v-model="dataStore.search">
-
+		<a href="#" @click="sendMail()">Send an email</a>
 	</div>
 </template>
 
@@ -24,6 +24,9 @@
 			searchFunc() {
 				Store.searchFunction();
 			},
+			sendMail() {
+				Store.sendMailJu();
+			}
 		}
 	}
 
