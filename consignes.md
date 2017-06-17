@@ -26,6 +26,7 @@ Nb: Chaque intitulé est accompagné d’une requête à effectuer côté Node/R
 * Pouvoir trier sur la liste par intitulé de A-Z ou par prix croissant avec une simple liste déroulante avec une requête en base de données
 
 * Créer un bouton pour chaque événement “Voir le détail” afin de tomber sur une vue ou l’on voit tout le détail d’un événement
+* Créer un bouton supprimer dans la vue détail pour supprimer un événement et avoir une redirection vers la liste (voir this.$router.push())
 
 ------
 
@@ -37,5 +38,3 @@ Nb: Chaque intitulé est accompagné d’une requête à effectuer côté Node/R
 ###Magasin de Bonus
  
 
-
-* Créer un bouton supprimer dans la vue détail pour supprimer un événement et avoir une redirection vers la liste (voir this.$router.push())
