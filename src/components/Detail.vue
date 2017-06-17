@@ -14,6 +14,7 @@
 						<p v-if="event.payant === false"><i class="material-icons">thumb_up</i></p>
 						<p>{{event.type}}</p>
 						<p>{{event.nbbillet}} billets disponibles</p>
+						<a><i class="material-icons" @click="deleteEvent()">delete</i></a>
 					</div>
 				</div>
 			</div>
@@ -36,6 +37,13 @@
 				this.event = res.data;
 			});
 		},
+		methods: {
+			deleteEvent() { // j'envoie une requete sur l'url
+				axios.delete(`http://localhost:3000/events/${this.event.id}`).then((res) => {
+					this.$router.push({ name: 'Hello' });
+				});
+			}
+		}
 	}
 
 </script>

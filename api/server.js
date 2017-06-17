@@ -81,6 +81,18 @@ let connection = r.connect({
 			});
 		});
 	});
+
+	app.delete('/events/:id', (req, res) => {
+		let id = req.params.id;
+		console.log(id)
+		r.db('onlylyon').table('festivals').get(id).delete().run(connection, (err, result) => {
+			res.json(result);
+		});
+	});
+
+
+
+
 	// c'est la partie Detail
 	app.get('/events/:id', (req, res) => {
 		// :id c'est pour envoyer un parametre à l'url
