@@ -22,6 +22,7 @@
 					<div class="card-action">
 						<a href="#" v-if="event.payant === true" @click="billetGratuit(event.id)">Gratuit</a>
 						<a href="#" v-if="event.payant === false" @click="billetPayant(event.id)">Payant</a>
+						<router-link :to="{ name: 'Detail', params: { id: event.id } } ">Voir le détail</router-link>
 					</div>
 				</div>
 			</div>
@@ -54,7 +55,10 @@
 			},
 			deleteBillet(id) {
 				Store.deleteNewBillet(id)
-			}
+			},
+			voirDetails(id) {
+				Store.plusDetails(id)
+			},
 		}
 	}
 

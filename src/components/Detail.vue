@@ -1,0 +1,48 @@
+<template>
+	<div>
+		<div class="row">
+			<div class="col s12 m7">
+				<div class="card">
+					<div class="card-image">
+						<img :src="event.url">
+						<span class="card-title">{{event.intitule}}</span>
+					</div>
+					<div class="card-content">
+						<p v-if="event.payant === true"><i class="material-icons">payment</i> {{event.prix}}€
+						</p>
+						<p v-if="event.payant === false"><i class="material-icons">thumb_up</i></p>
+						<p>{{event.type}}</p>
+						<p>{{event.nbbillet}} billets disponibles</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+<script>
+	import axios from 'axios';
+
+	export default {
+		name: 'detail',
+		data() {
+			return {
+				event: {}
+			}
+		},
+		created() {
+			axios.get(`http://localhost:3000/events/${this.$route.params.id}`).then((res) => {
+				this.event = res.data;
+			});
+		},
+	}
+
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+	div {
+		width: 900px;
+		margin: auto;
+	}
+</style>

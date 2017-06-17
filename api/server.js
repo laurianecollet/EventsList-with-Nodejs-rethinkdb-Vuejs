@@ -81,6 +81,15 @@ let connection = r.connect({
 			});
 		});
 	});
+	// c'est la partie Detail
+	app.get('/events/:id', (req, res) => {
+		// :id c'est pour envoyer un parametre à l'url
+		let id = req.params.id; // récupérer l'id en get en url
+		r.db('onlylyon').table('festivals').get(id).run(connection, (err, result) => { // lancer la requete avec la fonction run()
+			res.json(result);
+		})
+	});
+
 	// Change price in free 
 	app.post('/gratuit/:id', (req, res) => {
 		let id = req.params.id;

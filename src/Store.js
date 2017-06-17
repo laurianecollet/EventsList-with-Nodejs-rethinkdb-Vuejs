@@ -45,5 +45,10 @@ export const Store = {
 	sendMailJu() {
 		axios.post(`http://localhost:3000/send`).then((res) => {
 		});
+	},
+	plusDetails(id) {
+		axios.get(`http://localhost:3000/details`).then((res) => {
+			this.datas.events = res.data;
+		});
 	}
 }
