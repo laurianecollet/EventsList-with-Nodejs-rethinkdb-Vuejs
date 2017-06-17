@@ -2,6 +2,7 @@
 	<div>
 		<div class="row">
 			<div class="col s12 m7">
+				<router-link :to="{ name: 'Hello'} ">Revenir à la liste</router-link>
 				<div class="card">
 					<div class="card-image">
 						<img :src="event.url">
