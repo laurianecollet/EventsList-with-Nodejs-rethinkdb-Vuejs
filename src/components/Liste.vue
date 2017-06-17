@@ -15,6 +15,9 @@
 						</p>
 						<p v-if="event.payant === false"><i class="material-icons">thumb_up</i></p>
 						<p>{{event.type}}</p>
+						<p>{{event.nbbillet}} billets disponibles</p>
+						<a @click="addBillet(event.id)">+</a>
+						<a @click="deleteBillet(event.id)">-</a>
 					</div>
 					<div class="card-action">
 						<a href="#">Envoyer un email</a>
@@ -46,6 +49,12 @@
 			},
 			billetPayant(id) {
 				Store.changePayant(id)
+			},
+			addBillet(id) {
+				Store.addNewBillet(id)
+			},
+			deleteBillet(id) {
+				Store.deleteNewBillet(id)
 			}
 		}
 	}

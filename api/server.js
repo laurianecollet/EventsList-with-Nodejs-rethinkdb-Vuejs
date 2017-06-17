@@ -106,8 +106,35 @@ let connection = r.connect({
 		});
 	});
 
-	/* Requete pour trier par ordre croissant les prix r.db('onlylyon').table('festivals').limit(7).orderBy(r.asc('prix'))*/
+	app.post('/billetPlus/:id', (req, res) => {
+		let id = req.params.id
+		console.log(id)
+		r.db('onlylyon').table('festivals').get(id).update({ nbbillet: r.row("nbbillet").add(1) }).run(connection, (err, cursor) => {
+			if (err) throw err;
+			r.db('onlylyon').table('festivals').limit(7).orderBy('dateheure').run(connection, (err, cursor) => {
+				cursor.toArray((err, result) => {
+					return res.json(result)
+				});
+			});
+		});
+	});
 
+	app.post('/billetMoins/:id', (req, res) => {
+		let id = req.params.id
+		console.log(id)
+		r.db('onlylyon').table('festivals').get(id).update({ nbbillet: r.row("nbbillet").sub(1) }).run(connection, (err, cursor) => {
+			if (err) throw err;
+			r.db('onlylyon').table('festivals').limit(7).orderBy('dateheure').run(connection, (err, cursor) => {
+				cursor.toArray((err, result) => {
+					return res.json(result)
+				});
+			});
+		});
+	});
+
+
+	/* Requete pour trier par ordre croissant les prix r.db('onlylyon').table('festivals').limit(7).orderBy(r.asc('prix'))*/
+	/*Requete pour ajouter un billet : r.db('onlylyon').table('festivals').get('1b29ebe7-265b-4038-a46f-86c98551fb45')('nbbillet').add(1) */
 });
 
 app.listen(3000, function () {

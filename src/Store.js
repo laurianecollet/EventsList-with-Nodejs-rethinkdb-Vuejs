@@ -31,5 +31,16 @@ export const Store = {
 		axios.post(`http://localhost:3000/payant/${id}`).then((res) => {
 			this.datas.events = res.data;
 		});
+	},
+	addNewBillet(id) {
+		axios.post(`http://localhost:3000/billetPlus/${id}`).then((res) => {
+			this.datas.events = res.data;
+		});
+	},
+	deleteNewBillet(id) {
+		axios.post(`http://localhost:3000/billetMoins/${id}`).then((res) => {
+			this.datas.events = res.data;
+		});
 	}
+
 }
