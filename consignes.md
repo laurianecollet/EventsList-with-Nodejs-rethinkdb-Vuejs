@@ -19,13 +19,13 @@ Nb: Chaque intitulé est accompagné d’une requête à effectuer côté Node/R
 
 * A l’aide de  2 bouton “+” et “-” (icons) permettre d’augmenter ou de diminuer le nb de billet disponible
 
+* Créer un bouton permettant d’envoyer par email les 5 événements les plus récents à  l’adresse julien.boyer@wildcodeschool.fr
 
 ------
 
 * Pouvoir trier sur la liste par intitulé de A-Z ou par prix croissant avec une simple liste déroulante avec une requête en base de données
 
 
-* Créer un bouton permettant d’envoyer par email les 5 événements les plus récents à  l’adresse julien.boyer@wildcodeschool.fr
  
  
  

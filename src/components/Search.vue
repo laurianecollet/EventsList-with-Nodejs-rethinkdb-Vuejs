@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<vue-toast ref='toast'></vue-toast>
 		<li>
 			<select class="browser-default" @click="searchFunc()" v-model="dataStore.orderby">
     					<option value="" disabled selected>Trier par </option>
@@ -12,9 +13,14 @@
 </template>
 
 <script>
+	import 'vue-toast/dist/vue-toast.min.css'
+	import VueToast from 'vue-toast'
 	import { Store } from '@/Store.js';
 	export default {
 		name: 'search',
+		components: {
+			VueToast
+		},
 		data() {
 			return {
 				dataStore: Store.datas,
@@ -26,6 +32,8 @@
 			},
 			sendMail() {
 				Store.sendMailJu();
+				let toast = this.$refs.toast
+				toast.showToast('Le mail a été envoyé', { theme: 'info', timeLife: 1000 })
 			}
 		}
 	}

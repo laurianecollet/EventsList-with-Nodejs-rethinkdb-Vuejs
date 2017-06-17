@@ -121,7 +121,7 @@ let connection = r.connect({
 		console.log(id)
 		r.db('onlylyon').table('festivals').get(id).update({ nbbillet: r.row("nbbillet").add(1) }).run(connection, (err, cursor) => {
 			if (err) throw err;
-			r.db('onlylyon').table('festivals').limit(7).orderBy('dateheure').run(connection, (err, cursor) => {
+			r.db('onlylyon').table('festivals').run(connection, (err, cursor) => {
 				cursor.toArray((err, result) => {
 					return res.json(result)
 				});
@@ -143,7 +143,7 @@ let connection = r.connect({
 	});
 
 	app.post('/send', (req, res) => {
-		r.db('onlylyon').table('festivals').limit(5).run(connection, (err, cursor) => {
+		r.db('onlylyon').table('festivals').orderBy(r.desc('dateheure')).limit(5).run(connection, (err, cursor) => {
 			cursor.toArray((err, result) => {
 				let evenements = '';
 				result.forEach((event) => {
