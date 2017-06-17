@@ -35,9 +35,7 @@
 			}
 		},
 		created() {
-			this.$http.get('http://localhost:3000').then((response) => {
-				this.dataStore.events = response.body;
-			});
+			Store.loadData();
 		},
 	}
 

@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<li>
-			<select class="browser-default" v-model="datas.searchCategorie">
+			<select class="browser-default">
     					<option value="" disabled selected>Trier par </option>
 							<option >Intitule</option>
 							<option >Prix</option>
@@ -24,7 +24,7 @@
 		},
 		methods: {
 			searchFunction() {
-				this.$http.get(`http://localhost:3000/filter?search=${this.search}&tri=${this.intitule}`).then((res) => {
+				this.$http.get(`http://localhost:3000/filter?search=${this.search}`).then((res) => {
 					this.dataStore.events = res.body;
 					console.log(this.search) // il ne complete pas mon champ search 
 				});
