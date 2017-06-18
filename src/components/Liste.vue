@@ -20,8 +20,7 @@
 						<a @click="deleteBillet(event.id)">-</a>
 					</div>
 					<div class="card-action">
-						<a href="#" v-if="event.payant === true" @click="billetGratuit(event.id)">Gratuit</a>
-						<a href="#" v-if="event.payant === false" @click="billetPayant(event.id)">Payant</a>
+						<a href="#" @click="callToggleGratuit(event, event.payant)"><span v-if="event.payant">Payant</span><span v-else>Gratuit</span></a>
 						<router-link :to="{ name: 'Detail', params: { id: event.id } } ">Voir le détail</router-link>
 					</div>
 				</div>
@@ -43,12 +42,8 @@
 			Store.loadData();
 		},
 		methods: {
-			billetGratuit(id) {
-				Store.changeGratuit(id)
-				console.log(id)
-			},
-			billetPayant(id) {
-				Store.changePayant(id)
+			callToggleGratuit(event, eventIsPayant) {
+				Store.toggleGratuit(event, eventIsPayant)
 			},
 			addBillet(id) {
 				Store.addNewBillet(id)

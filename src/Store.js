@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Vue from 'vue';
 export const Store = {
 	datas: {
 		events: [],
@@ -21,17 +22,22 @@ export const Store = {
 			console.log(this.datas.events)
 		});
 	},
-	changeGratuit(id) {
-		axios.post(`http://localhost:3000/gratuit/${id}`).then((res) => {
-			this.datas.events = res.data;
+	toggleGratuit(event, eventIsPayant) {
+		axios.put(`http://localhost:3000/events/${event.id}`, { payant: !eventIsPayant }).then((res) => {
+			let editedEvent = res.data;
+			let indice = this.datas.events.indexOf(event)
+			if (indice != -1) {
+				this.datas.events[indice] = editedEvent;
+				Vue.set(this.datas.events, indice, editedEvent)
+			}
 		});
 	},
 
-	changePayant(id) {
+	/*changePayant(id) {
 		axios.post(`http://localhost:3000/payant/${id}`).then((res) => {
 			this.datas.events = res.data;
 		});
-	},
+	},*/
 	addNewBillet(id) {
 		axios.post(`http://localhost:3000/billetPlus/${id}`).then((res) => {
 			this.datas.events = res.data;

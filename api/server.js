@@ -117,7 +117,7 @@ let connection = r.connect({
 		let id = req.params.id;
 		console.log(id)
 		r.db('onlylyon').table('festivals').get(id).delete().run(connection, (err, result) => {
-			res.json(result);
+			return res.json(result);
 		});
 	});
 
@@ -129,36 +129,68 @@ let connection = r.connect({
 		// :id c'est pour envoyer un parametre à l'url
 		let id = req.params.id; // récupérer l'id en get en url
 		r.db('onlylyon').table('festivals').get(id).run(connection, (err, result) => { // lancer la requete avec la fonction run()
-			res.json(result);
+			return res.json(result);
 		})
 	});
 
-	// Change price in free 
-	app.post('/gratuit/:id', (req, res) => {
+
+
+
+
+
+	// Modification d'un évènement
+	app.put('/events/:id', (req, res) => {
+
 		let id = req.params.id;
-		console.log(id)
-		r.db('onlylyon').table('festivals').get(id).update({ payant: false, prix: null }).run(connection, (err, cursor) => {
-			if (err) throw err;
-			r.db('onlylyon').table('festivals').limit(7).orderBy('dateheure').run(connection, (err, cursor) => {
-				cursor.toArray((err, result) => {
-					return res.json(result)
-				});
+		let payant = req.body.payant;
+		let prix = null;
+
+		// Si on veut que l'evenement devienne payant, le prix devient 10
+		if (payant) {
+			prix = 10;
+		}
+
+		r.db('onlylyon').table('festivals').get(id).update({ payant: payant, prix: prix }).run(connection, (err, cursor) => {
+			r.db('onlylyon').table('festivals').get(id).run(connection, (err, result) => {
+				return res.json(result)
 			});
 		});
 	});
 
-	app.post('/payant/:id', (req, res) => {
-		let id = req.params.id;
-		console.log(id)
-		r.db('onlylyon').table('festivals').get(id).update({ payant: true, prix: 10 }).run(connection, (err, cursor) => {
-			if (err) throw err;
-			r.db('onlylyon').table('festivals').limit(7).orderBy('dateheure').run(connection, (err, cursor) => {
-				cursor.toArray((err, result) => {
+
+
+
+
+
+
+
+
+	/*
+			let id = req.params.id;
+			let payant = req.body.payant;
+	
+			// objet pour construire au fur et a mesure les modifications en fonction des parametres qu'on a reçu
+			let objetmodification = {}
+	
+			// Si param payant est défini alors je rajoute ce qu'il faut dans objetmodification
+			if (typeof (payant) !== "undefined") {
+				let prix = null;
+				// Si on veut que l'evenement devienne payant, le prix devient 10
+				if (payant) {
+					prix = 10;
+				}
+				objetmodification.prix = prix
+				objetmodification.payant = payant;
+			}
+	
+			console.log(objetmodification)
+	
+			/*r.db('onlylyon').table('festivals').get(id).update(objetmodification).run(connection, (err, cursor) => {
+				if (err) throw err;
+				r.db('onlylyon').table('festivals').get(id).run(connection, (err, result) => {
 					return res.json(result)
 				});
-			});
-		});
-	});
+			});*/
 
 	app.post('/billetPlus/:id', (req, res) => {
 		let id = req.params.id
