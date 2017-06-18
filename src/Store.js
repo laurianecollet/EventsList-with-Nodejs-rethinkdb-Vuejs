@@ -10,7 +10,7 @@ export const Store = {
 		orderby: '',
 	},
 	loadData() {
-		axios.get('http://localhost:3000/').then((response) => {
+		axios.get('http://localhost:3000/events?limit=7&orderBy=date').then((response) => {
 			this.datas.events = response.data;
 		});
 	},

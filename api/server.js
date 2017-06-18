@@ -51,7 +51,38 @@ let connection = r.connect({
 }).then((connection) => { // une fois qu'il a effectuer une connexion 
 
 	app.get('/', (req, res) => {
-		r.db('onlylyon').table('festivals').limit(7).orderBy('dateheure').run(connection, (err, cursor) => {
+		return res.json('Hello')
+	});
+
+	app.get('/events', (req, res) => {
+		let limitQuery = req.query.limit;
+		let limit = 7;
+		// Si l'utilisateur a renseigné le parametre limit et donc qu'il est différend d'undefined 
+		if (typeof (limitQuery) !== 'undefined') {
+			// Je Parseint le parametre que l'utilisateur a renseigné 
+			let limitInt = parseInt(limitQuery);
+			// Si le parametre saisi est un nombre alors on stock la limit saisi dans la variable limit
+			if (!isNaN(limitInt)) {
+				limit = limitInt
+			}
+			// Si cette limit est superieur à 10 alors on impose une limite à 10 par défaut dans ce cas précis
+			if (limit > 10) {
+				limit = 10;
+			}
+		}
+
+		// On construit la requête de base
+		let requete = r.db('onlylyon').table('festivals').limit(limit);
+		let orderBy = req.query.orderBy;
+
+		if (orderBy === 'date') {
+			requete = requete.orderBy('dateheure');
+		} else if (orderBy === 'nom') {
+			requete = requete.orderBy('intitule')
+		}
+
+		console.log(limit)
+		requete.run(connection, (err, cursor) => {
 			cursor.toArray((err, result) => {
 				return res.json(result)
 			})
