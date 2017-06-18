@@ -89,9 +89,9 @@ let connection = r.connect({
 		})
 	});
 	// Filter with a search
-	app.get('/filter/', (req, res) => {
+	app.get('/search', (req, res) => {
 		let tri = req.query.tri;
-		let search = req.query.search;
+		let search = req.query.intitule;
 		let requete = r.db('onlylyon').table('festivals');
 
 		if (search !== '') {

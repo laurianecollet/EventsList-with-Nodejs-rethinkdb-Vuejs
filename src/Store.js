@@ -15,7 +15,7 @@ export const Store = {
 		});
 	},
 	searchFunction() {
-		axios.get(`http://localhost:3000/filter?search=${this.datas.search}&tri=${this.datas.orderby}`).then((res) => {
+		axios.get(`http://localhost:3000/search?intitule=${this.datas.search}&tri=${this.datas.orderby}`).then((res) => {
 			this.datas.events = res.data;
 			console.log(this.datas.search)
 			console.log(this.datas.events)
