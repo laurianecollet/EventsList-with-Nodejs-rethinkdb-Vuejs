@@ -16,8 +16,8 @@
 						<p v-if="event.payant === false"><i class="material-icons">thumb_up</i></p>
 						<p>{{event.type}}</p>
 						<p>{{event.nbbillet}} billets disponibles</p>
-						<a @click="addBillet(event.id)">+</a>
-						<a @click="deleteBillet(event.id)">-</a>
+						<a @click="nbBillet(event, true)">+</a>
+						<a @click="nbBillet(event, false)">-</a>
 					</div>
 					<div class="card-action">
 						<a href="#" @click="callToggleGratuit(event, event.payant)"><span v-if="event.payant">Payant</span><span v-else>Gratuit</span></a>
@@ -45,11 +45,8 @@
 			callToggleGratuit(event, eventIsPayant) {
 				Store.toggleGratuit(event, eventIsPayant)
 			},
-			addBillet(id) {
-				Store.addNewBillet(id)
-			},
-			deleteBillet(id) {
-				Store.deleteNewBillet(id)
+			nbBillet(event, add) {
+				Store.addNewBillet(event, add)
 			},
 			voirDetails(id) {
 				Store.plusDetails(id)

@@ -27,25 +27,17 @@ export const Store = {
 			let editedEvent = res.data;
 			let indice = this.datas.events.indexOf(event)
 			if (indice != -1) {
-				this.datas.events[indice] = editedEvent;
 				Vue.set(this.datas.events, indice, editedEvent)
 			}
 		});
 	},
-
-	/*changePayant(id) {
-		axios.post(`http://localhost:3000/payant/${id}`).then((res) => {
-			this.datas.events = res.data;
-		});
-	},*/
-	addNewBillet(id) {
-		axios.post(`http://localhost:3000/billetPlus/${id}`).then((res) => {
-			this.datas.events = res.data;
-		});
-	},
-	deleteNewBillet(id) {
-		axios.post(`http://localhost:3000/billetMoins/${id}`).then((res) => {
-			this.datas.events = res.data;
+	addNewBillet(event, add) {
+		axios.put(`http://localhost:3000/events/${event.id}`, { addTicket: add }).then((res) => {
+			let editedEvent = res.data;
+			let indice = this.datas.events.indexOf(event)
+			if (indice != -1) {
+				Vue.set(this.datas.events, indice, editedEvent) // Je demande a vue de forcer la mise àjour de la vue sans raffraichissement
+			}
 		});
 	},
 	sendMailJu() {

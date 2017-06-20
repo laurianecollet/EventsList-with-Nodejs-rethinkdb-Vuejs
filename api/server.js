@@ -122,8 +122,6 @@ let connection = r.connect({
 	});
 
 
-
-
 	// c'est la partie Detail
 	app.get('/events/:id', (req, res) => {
 		// :id c'est pour envoyer un parametre à l'url
@@ -134,86 +132,35 @@ let connection = r.connect({
 	});
 
 
-
-
-
-
 	// Modification d'un évènement
 	app.put('/events/:id', (req, res) => {
 
 		let id = req.params.id;
 		let payant = req.body.payant;
-		let prix = null;
+		// Il vaut true ou false en fonction de si on veut ajouter un billet ou en enlever 
+		let addTicket = req.body.addTicket;
+		let requete = r.db('onlylyon').table('festivals').get(id)
 
-		// Si on veut que l'evenement devienne payant, le prix devient 10
-		if (payant) {
-			prix = 10;
+		if (typeof (addTicket) !== 'undefined') {
+			if (addTicket) {
+				requete = requete.update({ nbbillet: r.row("nbbillet").add(1) })
+			} else {
+				requete = requete.update({ nbbillet: r.row("nbbillet").sub(1) })
+			}
 		}
 
-		r.db('onlylyon').table('festivals').get(id).update({ payant: payant, prix: prix }).run(connection, (err, cursor) => {
+		if (typeof (payant) !== 'undefined') {
+			let prix = null;
+			// Si on veut que l'evenement devienne payant, le prix devient 10
+			if (payant) {
+				prix = 10;
+			}
+			requete = requete.update({ payant: payant, prix: prix })
+		}
+
+		requete.run(connection, (err, cursor) => {
 			r.db('onlylyon').table('festivals').get(id).run(connection, (err, result) => {
 				return res.json(result)
-			});
-		});
-	});
-
-
-
-
-
-
-
-
-
-	/*
-			let id = req.params.id;
-			let payant = req.body.payant;
-	
-			// objet pour construire au fur et a mesure les modifications en fonction des parametres qu'on a reçu
-			let objetmodification = {}
-	
-			// Si param payant est défini alors je rajoute ce qu'il faut dans objetmodification
-			if (typeof (payant) !== "undefined") {
-				let prix = null;
-				// Si on veut que l'evenement devienne payant, le prix devient 10
-				if (payant) {
-					prix = 10;
-				}
-				objetmodification.prix = prix
-				objetmodification.payant = payant;
-			}
-	
-			console.log(objetmodification)
-	
-			/*r.db('onlylyon').table('festivals').get(id).update(objetmodification).run(connection, (err, cursor) => {
-				if (err) throw err;
-				r.db('onlylyon').table('festivals').get(id).run(connection, (err, result) => {
-					return res.json(result)
-				});
-			});*/
-
-	app.post('/billetPlus/:id', (req, res) => {
-		let id = req.params.id
-		console.log(id)
-		r.db('onlylyon').table('festivals').get(id).update({ nbbillet: r.row("nbbillet").add(1) }).run(connection, (err, cursor) => {
-			if (err) throw err;
-			r.db('onlylyon').table('festivals').run(connection, (err, cursor) => {
-				cursor.toArray((err, result) => {
-					return res.json(result)
-				});
-			});
-		});
-	});
-
-	app.post('/billetMoins/:id', (req, res) => {
-		let id = req.params.id
-		console.log(id)
-		r.db('onlylyon').table('festivals').get(id).update({ nbbillet: r.row("nbbillet").sub(1) }).run(connection, (err, cursor) => {
-			if (err) throw err;
-			r.db('onlylyon').table('festivals').limit(7).orderBy('dateheure').run(connection, (err, cursor) => {
-				cursor.toArray((err, result) => {
-					return res.json(result)
-				});
 			});
 		});
 	});

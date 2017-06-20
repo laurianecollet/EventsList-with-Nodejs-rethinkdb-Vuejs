@@ -36,3 +36,22 @@
 2017-06-18T15:11:05.933144000 0.202914s notice: Server ready, "MacBook_Air_de_Lauriane_local_y86" 3378f176-aa74-49b4-9cf3-dc47ef7715d0
 2017-06-18T15:11:07.013159000 1.282930s info: Table 600257f5-24c1-46b1-9fac-8fd63c8afae4: Starting a new Raft election for term 2.
 2017-06-18T15:11:07.032215000 1.301985s info: Table 600257f5-24c1-46b1-9fac-8fd63c8afae4: This server is Raft leader for term 2. Latest log index is 2.
+2017-06-19T09:25:15.854913000 29039.568821s notice: Server got SIGINT from pid 7795, uid 501; shutting down...
+2017-06-19T09:25:15.856373000 29039.570277s notice: Shutting down client connections...
+2017-06-19T09:25:15.860750000 29039.574655s notice: All client connections closed.
+2017-06-19T09:25:15.860768000 29039.574671s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2017-06-19T09:25:15.898673000 29039.612578s notice: Storage engine shut down.
+2017-06-20T21:29:35.840145000 0.075586s notice: Running rethinkdb 2.3.5 (CLANG 7.3.0 (clang-703.0.31))...
+2017-06-20T21:29:35.858603000 0.094040s notice: Running on Darwin 16.5.0 x86_64
+2017-06-20T21:29:35.859179000 0.094614s notice: Loading data from directory /Users/laurianecollet/Dev/Checkpoint4/my-project/rethinkdb_data
+2017-06-20T21:29:35.967622000 0.203057s info: Automatically using cache size of 193 MB
+2017-06-20T21:29:35.968439000 0.203874s notice: Listening for intracluster connections on port 29015
+2017-06-20T21:29:36.006855000 0.242290s notice: Listening for client driver connections on port 28015
+2017-06-20T21:29:36.007272000 0.242707s notice: Listening for administrative HTTP connections on port 8080
+2017-06-20T21:29:36.007278000 0.242713s notice: Listening on cluster addresses: 127.0.0.1, ::1
+2017-06-20T21:29:36.007282000 0.242716s notice: Listening on driver addresses: 127.0.0.1, ::1
+2017-06-20T21:29:36.007284000 0.242719s notice: Listening on http addresses: 127.0.0.1, ::1
+2017-06-20T21:29:36.007302000 0.242737s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2017-06-20T21:29:36.007306000 0.242740s notice: Server ready, "MacBook_Air_de_Lauriane_local_y86" 3378f176-aa74-49b4-9cf3-dc47ef7715d0
+2017-06-20T21:29:37.980828000 2.216204s info: Table 600257f5-24c1-46b1-9fac-8fd63c8afae4: Starting a new Raft election for term 3.
+2017-06-20T21:29:37.999243000 2.234619s info: Table 600257f5-24c1-46b1-9fac-8fd63c8afae4: This server is Raft leader for term 3. Latest log index is 5.
